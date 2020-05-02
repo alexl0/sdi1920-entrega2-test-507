@@ -75,7 +75,7 @@ public class NotaneitorTests {
 		driver.quit();
 	}
 
-	//PR01. Sin hacer /
+	//PR01. 
 	@Test
 	public void PR01() {
 		PO_RegisterView.clickOption(driver, "registrarse", "class", "btn btn-primary");
@@ -83,14 +83,14 @@ public class NotaneitorTests {
 		PO_View.checkElement(driver, "text", "Nuevo usuario registrado");
 	}
 
-	//PR02. Sin hacer /
+	//PR02. 
 	@Test
 	public void PR02() {
 		PO_RegisterView.clickOption(driver, "registrarse", "class", "btn btn-primary");
 		PO_RegisterView.fillForm(driver, "", "", "", "123456", "123456");	
 	}
 
-	//PR03. Sin hacer /
+	//PR03. 
 	@Test
 	public void PR03() {
 		PO_RegisterView.clickOption(driver, "registrarse", "class", "btn btn-primary");
@@ -98,7 +98,7 @@ public class NotaneitorTests {
 		PO_View.checkElement(driver, "text", "Las contraseñas no coinciden");
 	}
 
-	//PR04. Sin hacer /
+	//PR04. 
 	@Test
 	public void PR04() {
 		PO_RegisterView.clickOption(driver, "registrarse", "class", "btn btn-primary");
@@ -106,7 +106,7 @@ public class NotaneitorTests {
 		PO_View.checkElement(driver, "text", "Este email ya está registrado");		
 	}
 
-	//PR05. Sin hacer /
+	//PR05. 
 	@Test
 	public void PR05() {
 		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -115,7 +115,7 @@ public class NotaneitorTests {
 		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 	}
 
-	//PR06. Sin hacer /
+	//PR06. 
 	@Test
 	public void PR06() {	
 		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -123,7 +123,7 @@ public class NotaneitorTests {
 		PO_View.checkElement(driver, "text", "Identificación de usuario");
 	}
 
-	//PR07. Sin hacer /
+	//PR07. 
 	@Test
 	public void PR07() {
 		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -131,7 +131,7 @@ public class NotaneitorTests {
 		PO_LoginView.checkElement(driver, "text", "Email o password incorrecto");
 	}	
 
-	//PR08. Sin hacer /
+	//PR08. 
 	@Test
 	public void PR08() {
 		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -139,7 +139,7 @@ public class NotaneitorTests {
 		PO_LoginView.checkElement(driver, "text", "Email o password incorrecto");			
 	}	
 
-	//PR09. Sin hacer /
+	//PR09. 
 	@Test
 	public void PR09() {
 		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -149,14 +149,14 @@ public class NotaneitorTests {
 		PO_LoginView.checkElement(driver, "text", "Se ha desconectado con éxito.");
 		PO_LoginView.checkElement(driver, "text", "Identificación de usuario");
 	}	
-	//PR10. Sin hacer /
+	//PR10. 
 	@Test
 	public void PR10() {
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "Desconectarse",
 				PO_View.getTimeout());		
 	}	
 
-	//PR11. Sin hacer /
+	//PR11. 
 	@Test
 	public void PR11() {
 		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -177,7 +177,7 @@ public class NotaneitorTests {
 		PO_View.checkElement(driver, "text", "user12@email.com");
 	}	
 
-	//PR12. Sin hacer /
+	//PR12. 
 	@Test
 	public void PR12() {
 		driver.navigate().to("https://localhost:8081/identificarse");
@@ -190,7 +190,7 @@ public class NotaneitorTests {
 		PO_PrivateView.checkElement(driver, "text", "user5@email.com");
 	}	
 
-	//PR13. Sin hacer /
+	//PR13. 
 	@Test
 	public void PR13() {
 		driver.navigate().to("https://localhost:8081/identificarse");
@@ -207,24 +207,10 @@ public class NotaneitorTests {
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user5@email.com",
 				PO_View.getTimeout());	
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user5@email.com",
-				PO_View.getTimeout());	
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user6@email.com",
-				PO_View.getTimeout());	
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user7@email.com",
-				PO_View.getTimeout());	
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user8@email.com",
-				PO_View.getTimeout());	
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user9@email.com",
-				PO_View.getTimeout());	
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user10@email.com",
-				PO_View.getTimeout());	
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user11@email.com",
-				PO_View.getTimeout());	
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user12@email.com",
-				PO_View.getTimeout());	
+				PO_View.getTimeout());		
 	}	
 
-	//PR14. Sin hacer /
+	//PR14. 
 	@Test
 	public void PR14() {
 		driver.navigate().to("https://localhost:8081/identificarse");
@@ -240,113 +226,249 @@ public class NotaneitorTests {
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user5@email.com",
 				PO_View.getTimeout());	
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user5@email.com",
-				PO_View.getTimeout());	
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user6@email.com",
-				PO_View.getTimeout());	
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user7@email.com",
-				PO_View.getTimeout());	
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user8@email.com",
-				PO_View.getTimeout());	
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user9@email.com",
-				PO_View.getTimeout());	
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user10@email.com",
-				PO_View.getTimeout());	
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user11@email.com",
-				PO_View.getTimeout());	
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user12@email.com",
-				PO_View.getTimeout());			
+				PO_View.getTimeout());				
 	}	
 
-	//PR15. Sin hacer /
-	//@Test
+	//PR15. 
+	@Test
 	public void PR15() {
-		assertTrue("PR15 sin hacer", false);			
+		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");	
+
+		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
+		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
+		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+
+		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+		driver.navigate().to("https://localhost:8081/invitaciones");
+		PO_View.checkElement(driver, "text", "prueba1@email.com");
 	}	
 
-	//PR16. Sin hacer /
-	//@Test
+	//PR16. 
+	@Test
 	public void PR16() {
-		assertTrue("PR16 sin hacer", false);			
+		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");	
+
+		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
+		PO_View.checkElement(driver, "text", "Hay invitaciones pendientes entre usted y esa persona");
 	}	
 
-	//PR017. Sin hacer /
-	//@Test
+	//PR017. 
+	@Test
 	public void PR17() {
-		assertTrue("PR17 sin hacer", false);			
+
+		//Enviar más peticiones a user1 desde otros usuarios
+		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.fillForm(driver, "user2@email.com", "123456");	
+		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
+		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
+		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+
+		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.fillForm(driver, "user3@email.com", "123456");	
+		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
+		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
+		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+
+		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.fillForm(driver, "user4@email.com", "123456");	
+		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
+		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
+		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+
+		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.fillForm(driver, "user5@email.com", "123456");	
+		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
+		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
+		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+
+		//Comprobar que las ha recibido user1
+		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+		driver.navigate().to("https://localhost:8081/invitaciones");
+		PO_View.checkElement(driver, "text", "prueba1@email.com");
+		PO_View.checkElement(driver, "text", "user2@email.com");
+		PO_View.checkElement(driver, "text", "user3@email.com");
+		PO_View.checkElement(driver, "text", "user4@email.com");
+		PO_View.checkElement(driver, "text", "user5@email.com");
 	}	
 
-	//PR18. Sin hacer /
-	//@Test
+
+	//PR18.
+	@Test
 	public void PR18() {
-		assertTrue("PR18 sin hacer", false);			
+		//Se loguea user1
+		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+
+		//Acepta la petición de prueba1
+		driver.navigate().to("https://localhost:8081/invitaciones");
+		driver.navigate().to("https://localhost:8081/usuario/aceptar/prueba1@email.com");
+		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");			
 	}	
 
-	//PR19. Sin hacer /
-	//@Test
+	/**
+	 * Envia invitación de amistad a un amigo
+	 */
+	@Test
+	public void PR18_1() {
+		//Se loguea user1
+		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+
+		//Le intenta volver a invitar a prueba1
+		driver.navigate().to("https://localhost:8081/usuario/invitar/prueba1@email.com");
+		PO_View.checkElement(driver, "text", "Ya es amigo de esa persona");
+	}
+
+	/**
+	 * Intentar aceptar a un usuario que no te ha invitado
+	 */
+	@Test
+	public void PR18_2() {
+		//Se loguea user1
+		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+
+		driver.navigate().to("https://localhost:8081/usuario/aceptar/user10@email.com");
+		PO_View.checkElement(driver, "text", "No tiene una invitación de esa persona");
+
+	}
+
+	/**
+	 * Intentar agregarse a si mismo
+	 */
+	@Test
+	public void PR18_3() {
+		//Se loguea user1
+		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+
+		driver.navigate().to("https://localhost:8081/usuario/aceptar/user1@email.com");
+		PO_View.checkElement(driver, "text", "No se puede agregar a si mismo");
+
+	}
+
+	/**
+	 * Intentar agregar a alguien sin estar logueado
+	 */
+	@Test
+	public void PR18_4() {
+		driver.navigate().to("https://localhost:8081/usuario/aceptar/user1@email.com");
+		PO_View.checkElement(driver, "text", "Debe identificarse primero");
+	}
+
+	/**
+	 * Intentar agregar a alguien que no existe
+	 */
+	@Test
+	public void PR18_5() {
+		//Se loguea user1
+		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+
+		driver.navigate().to("https://localhost:8081/usuario/aceptar/userNoExistep14909472@email.com");
+		PO_View.checkElement(driver, "text", "No existe el usuario que se desea agregar");
+
+	}
+
+
+	//PR19. 
+	@Test
 	public void PR19() {
-		assertTrue("PR19 sin hacer", false);			
+		//Se loguea user1
+		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");		
+
+		//Acepta al resto de amigos que le han invitado
+		driver.navigate().to("https://localhost:8081/invitaciones");
+		driver.navigate().to("https://localhost:8081/usuario/aceptar/user2@email.com");
+		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");	
+		driver.navigate().to("https://localhost:8081/usuario/aceptar/user3@email.com");
+		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");
+		driver.navigate().to("https://localhost:8081/usuario/aceptar/user4@email.com");
+		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");
+		driver.navigate().to("https://localhost:8081/usuario/aceptar/user5@email.com");
+		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");
+
+		//Va al listado de amigos
+		driver.navigate().to("https://localhost:8081/amigos");
+		//También se podría hacer así
+		//PO_RegisterView.clickOption(driver, "amigos", "class", "btn btn-primary");
+
+		//Comprobar que están los amigos
+		PO_View.checkElement(driver, "text", "prueba1@email.com");	
+		PO_View.checkElement(driver, "text", "user2@email.com");	
+		PO_View.checkElement(driver, "text", "user3@email.com");	
+		PO_View.checkElement(driver, "text", "user4@email.com");	
+		PO_View.checkElement(driver, "text", "user5@email.com");	
+
 	}	
 
-	//P20. Sin hacer /
-	//@Test
+	//P20. 
+	@Test
 	public void PR20() {
-		assertTrue("PR20 sin hacer", false);			
+		driver.navigate().to("https://localhost:8081/amigos");	
+		PO_View.checkElement(driver, "text", "Identificación de usuario");	
 	}	
 
-	//PR21. Sin hacer /
-	//@Test
+	//PR21. 
+	@Test
 	public void PR21() {
-		assertTrue("PR21 sin hacer", false);			
+		driver.navigate().to("https://localhost:8081/invitaciones");
+		PO_View.checkElement(driver, "text", "Identificación de usuario");				
 	}	
 
-	//PR22. Sin hacer /
-	//@Test
+	//PR22. No se puede hacer eso en la aplicación.
+	@Test
 	public void PR22() {
-		assertTrue("PR22 sin hacer", false);			
+		assertTrue("No se puede hacer eso en la aplicación.", true);			
 	}	
 
-	//PR23. Sin hacer /
+	//PR23. 
 	//@Test
 	public void PR23() {
 		assertTrue("PR23 sin hacer", false);			
 	}	
 
-	//PR24. Sin hacer /
+	//PR24. 
 	//@Test
 	public void PR24() {
 		assertTrue("PR24 sin hacer", false);			
 	}	
-	//PR25. Sin hacer /
+	//PR25. 
 	//@Test
 	public void PR25() {
 		assertTrue("PR25 sin hacer", false);			
 	}	
 
-	//PR26. Sin hacer /
+	//PR26. 
 	//@Test
 	public void PR26() {
 		assertTrue("PR26 sin hacer", false);			
 	}	
 
-	//PR27. Sin hacer /
+	//PR27. 
 	//@Test
 	public void PR27() {
 		assertTrue("PR27 sin hacer", false);			
 	}	
 
-	//PR029. Sin hacer /
+	//PR029. 
 	//@Test
 	public void PR29() {
 		assertTrue("PR29 sin hacer", false);			
 	}
 
-	//PR030. Sin hacer /
+	//PR030. 
 	//@Test
 	public void PR30() {
 		assertTrue("PR30 sin hacer", false);			
 	}
 
-	//PR031. Sin hacer /
+	//PR031. 
 	//@Test
 	public void PR31() {
 		assertTrue("PR31 sin hacer", false);			

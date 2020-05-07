@@ -14,7 +14,7 @@ import com.uniovi.tests.util.SeleniumUtils;
 import com.uniovi.tests.pageobjects.*;
 
 
-//Ordenamos las pruebas por el nombre del mÃ©todo
+//Ordenamos las pruebas por el nombre del método
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) 
 public class FriendsManagerTests {
 	//En Windows (Debe ser la versiÃ³n 65.0.1 y desactivar las actualizacioens automÃ¡ticas)):
@@ -61,14 +61,14 @@ public class FriendsManagerTests {
 		//En una aplicación comercial no se haría esto bajo ninguna
 		//circunstancia. Solo tiene la intención de facilitar la
 		//ejecución de los test.
-		/*driver.navigate().to(URL+"/borrarUsuarios");
+		driver.navigate().to(URL+"/borrarUsuarios");
 
 		//Crear de nuevo los usuarios de prueba
 		for(int i=1;i<13;i++) {
 			PO_RegisterView.clickOption(driver, "registrarse", "class", "btn btn-primary");
 			PO_RegisterView.fillForm(driver, "user"+i+"@email.com", "user"+i, "user"+i, "123456", "123456");	
 		}
-		 */
+
 	}
 	@AfterClass
 	static public void end() {
@@ -310,14 +310,13 @@ public class FriendsManagerTests {
 		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 		//driver.navigate().to("https://localhost:8081/invitaciones");
-		PO_NavView.clickOption(driver, "invitaciones", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "invitaciones", "class", "invitaciones");
 		PO_View.checkElement(driver, "text", "prueba1@email.com");
 		PO_View.checkElement(driver, "text", "user2@email.com");
 		PO_View.checkElement(driver, "text", "user3@email.com");
 		PO_View.checkElement(driver, "text", "user4@email.com");
 		PO_View.checkElement(driver, "text", "user5@email.com");
 	}	
-
 
 	//PR18.
 	@Test
@@ -327,7 +326,7 @@ public class FriendsManagerTests {
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 
 		//Acepta la petición de prueba1
-		PO_NavView.clickOption(driver, "invitaciones", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "invitaciones", "class", "invitaciones");
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/prueba1@email.com");
 		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");			
 	}	
@@ -397,7 +396,6 @@ public class FriendsManagerTests {
 
 	}
 
-
 	//PR19. 
 	@Test
 	public void PR19() {
@@ -406,7 +404,7 @@ public class FriendsManagerTests {
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");		
 
 		//Acepta al resto de amigos que le han invitado
-		PO_NavView.clickOption(driver, "invitaciones", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "invitaciones", "class", "invitaciones");
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/user2@email.com");
 		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");	
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/user3@email.com");
@@ -417,7 +415,7 @@ public class FriendsManagerTests {
 		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");
 
 		//Va al listado de amigos
-		PO_NavView.clickOption(driver, "amigos", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "amigos", "class", "amigos");
 
 		//Comprobar que están los amigos
 		PO_View.checkElement(driver, "text", "prueba1@email.com");	
@@ -444,22 +442,31 @@ public class FriendsManagerTests {
 		PO_View.checkElement(driver, "text", "Identificación de usuario");				
 	}	
 
-	//PR22. No se puede hacer eso en la aplicación.
+	/**
+	 * PR22.
+	 * No se puede hacer eso en la aplicación, ya que el usuario en sesión
+	 * se detecta automáticamente, no se le pasa como parámetro, por tanto
+	 * no hay manera fácil de falsificarlo.
+	 */
 	@Test
 	public void PR22() {
 		assertTrue("No se puede hacer eso en la aplicación.", true);			
 	}	
 
 	//PR23. 
-	//@Test
+	@Test
 	public void PR23() {
-		assertTrue("PR23 sin hacer", false);			
-	}	
+		driver.navigate().to(URL+"/cliente.html");
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+	}
 
 	//PR24. 
 	//@Test
 	public void PR24() {
-		assertTrue("PR24 sin hacer", false);			
+		driver.navigate().to(URL+"/cliente.html");
+		PO_LoginView.fillForm(driver, "userNoExisteEnLaAplicacion8r1u91u982rh@email.com", "1234567890");
+		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");			
 	}	
 	//PR25. 
 	//@Test

@@ -64,14 +64,14 @@ public class FriendsManagerTests {
 		//En una aplicación comercial no se haría esto bajo ninguna
 		//circunstancia. Solo tiene la intención de facilitar la
 		//ejecución de los test.
-		driver.navigate().to(URL+"/borrarUsuarios");
+		/*driver.navigate().to(URL+"/borrarUsuarios");
 
 		//Crear de nuevo los usuarios de prueba
 		for(int i=1;i<13;i++) {
 			PO_RegisterView.clickOption(driver, "registrarse", "class", "btn btn-primary");
 			PO_RegisterView.fillForm(driver, "user"+i+"@email.com", "user"+i, "user"+i, "123456", "123456");	
 		}
-
+		 */
 	}
 	@AfterClass
 	static public void end() {
@@ -551,7 +551,8 @@ public class FriendsManagerTests {
 	}
 
 	/**
-	 * Método auxiliar para escribir mensajes de prueba
+	 * Método auxiliar para escribir mensajes de prueba y
+	 * no repetir código más de lo necesario
 	 * @param i numero del mensaje
 	 */
 	private void escribirMensajeYEnviar(int i) {
@@ -641,7 +642,43 @@ public class FriendsManagerTests {
 	//PR031. 
 	@Test
 	public void PR31() {
-		assertTrue("PR31 sin hacer", true);			
+		//Loguearse
+		driver.navigate().to(URL+"/cliente.html");
+		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+
+		//Averiguar cual es el amigo que está más arriba
+		List<WebElement> elementsListAbajo = PO_View.checkElement(driver, "free", "//tbody/tr[5]/td[5][contains(text(),'@')]");
+		String emailMasAbajo = elementsListAbajo.get(0).getText();
+
+		//Clickar en el amigo correspondiente
+		//SeleniumUtils.esperarSegundos(driver, 3);
+		PO_PrivateView.checkElement(driver, "text", emailMasAbajo);
+		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'"+emailMasAbajo+"')]"));
+		elementsList.get(0).click();
+
+		//Escribir el mensaje
+		PO_View.checkElement(driver, "free", "//*[@id=\"escribir-mensaje\"]").get(0)
+		.sendKeys("Hola user5! Soy user1! Hacía tiempo que no hablabamos.");		
+
+		//Enviar el mensaje
+		PO_View.checkElement(driver, "free", "//*[@id=\"botonEnviarMensaje\"]")
+		.get(0).click();
+
+		//Esperar a que salga en pantalla
+		PO_PrivateView.checkElement(driver, "text", "Hola user5! Soy user1! Hacía tiempo que no hablabamos.");
+
+		//Volver a amigos
+		List<WebElement> elementsList2 = driver.findElements(By.xpath("//*[contains(text(),'Amigos')]"));
+		elementsList2.get(0).click();
+
+		//Averiguar cual es el amigo que está más arriba
+		List<WebElement> elementsListArriba = PO_View.checkElement(driver, "free", "//tbody/tr[1]/td[1][contains(text(),'@')]");
+		String emailMasArriba = elementsListArriba.get(0).getText();
+
+		//Comprobamos que ahora el que está arriba, era el que estaba antes abajo.
+		Assert.assertTrue(emailMasArriba==emailMasAbajo);
 	}
 
 

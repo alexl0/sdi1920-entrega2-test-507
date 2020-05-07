@@ -1,6 +1,6 @@
 package com.uniovi.tests;
 //Paquetes Java
-import java.util.List;
+//import java.util.List;
 //Paquetes JUnit 
 import org.junit.*;
 import org.junit.runners.MethodSorters;
@@ -16,7 +16,7 @@ import com.uniovi.tests.pageobjects.*;
 
 //Ordenamos las pruebas por el nombre del mÃ©todo
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) 
-public class NotaneitorTests {
+public class FriendsManagerTests {
 	//En Windows (Debe ser la versiÃ³n 65.0.1 y desactivar las actualizacioens automÃ¡ticas)):
 	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox6501\\firefox.exe";
 	static String Geckdriver024 = "C:\\Users\\UO258774\\git\\SDI\\entrega2\\geckodriver024win64.exe";
@@ -61,13 +61,14 @@ public class NotaneitorTests {
 		//En una aplicación comercial no se haría esto bajo ninguna
 		//circunstancia. Solo tiene la intención de facilitar la
 		//ejecución de los test.
-		driver.navigate().to(URL+"/borrarUsuarios");
+		/*driver.navigate().to(URL+"/borrarUsuarios");
 
 		//Crear de nuevo los usuarios de prueba
 		for(int i=1;i<13;i++) {
 			PO_RegisterView.clickOption(driver, "registrarse", "class", "btn btn-primary");
 			PO_RegisterView.fillForm(driver, "user"+i+"@email.com", "user"+i, "user"+i, "123456", "123456");	
 		}
+		 */
 	}
 	@AfterClass
 	static public void end() {
@@ -166,13 +167,15 @@ public class NotaneitorTests {
 		PO_View.checkElement(driver, "text", "user3@email.com");
 		PO_View.checkElement(driver, "text", "user4@email.com");
 		PO_View.checkElement(driver, "text", "user5@email.com");
-		driver.navigate().to("https://localhost:8081/verUsuarios?pg=2");
+		PO_View.checkElement(driver, "free",
+				"//a[contains(@class, 'page-link')]").get(1).click();
 		PO_View.checkElement(driver, "text", "user6@email.com");
 		PO_View.checkElement(driver, "text", "user7@email.com");
 		PO_View.checkElement(driver, "text", "user8@email.com");
 		PO_View.checkElement(driver, "text", "user9@email.com");
 		PO_View.checkElement(driver, "text", "user10@email.com");
-		driver.navigate().to("https://localhost:8081/verUsuarios?pg=3");
+		PO_View.checkElement(driver, "free",
+				"//a[contains(@class, 'page-link')]").get(2).click();
 		PO_View.checkElement(driver, "text", "user11@email.com");
 		PO_View.checkElement(driver, "text", "user12@email.com");
 	}	
@@ -180,22 +183,32 @@ public class NotaneitorTests {
 	//PR12. 
 	@Test
 	public void PR12() {
-		driver.navigate().to("https://localhost:8081/identificarse");
-		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");
-		driver.navigate().to("https://localhost:8081/verUsuarios?busqueda="+"");
-		PO_PrivateView.checkElement(driver, "text", "user1@email.com");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+		//Escribir en la barra de búsqueda
+		PO_View.checkElement(driver, "free", "//*[@id=\"searchText\"]").get(0)
+		.sendKeys("");
+		// Ahora hacemos click en buscar
+		PO_View.checkElement(driver, "free", "//*[@id=\"searchButton\"]")
+		.get(0).click();
 		PO_PrivateView.checkElement(driver, "text", "user2@email.com");
 		PO_PrivateView.checkElement(driver, "text", "user3@email.com");
 		PO_PrivateView.checkElement(driver, "text", "user4@email.com");
 		PO_PrivateView.checkElement(driver, "text", "user5@email.com");
+		PO_PrivateView.checkElement(driver, "text", "user6@email.com");
 	}	
 
 	//PR13. 
 	@Test
 	public void PR13() {
-		driver.navigate().to("https://localhost:8081/identificarse");
-		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");
-		driver.navigate().to("https://localhost:8081/verUsuarios?busqueda="+"userNoExiste");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+		//Escribir en la barra de búsqueda
+		PO_View.checkElement(driver, "free", "//*[@id=\"searchText\"]").get(0)
+		.sendKeys("userNoExiste");
+		// Ahora hacemos click en buscar
+		PO_View.checkElement(driver, "free", "//*[@id=\"searchButton\"]")
+		.get(0).click();
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user1@email.com",
 				PO_View.getTimeout());	
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user2@email.com",
@@ -213,9 +226,14 @@ public class NotaneitorTests {
 	//PR14. 
 	@Test
 	public void PR14() {
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");
-		driver.navigate().to("https://localhost:8081/verUsuarios?busqueda="+"user1");
+		//Escribir en la barra de búsqueda
+		PO_View.checkElement(driver, "free", "//*[@id=\"searchText\"]").get(0)
+		.sendKeys("user1");
+		// Ahora hacemos click en buscar
+		PO_View.checkElement(driver, "free", "//*[@id=\"searchButton\"]")
+		.get(0).click();
 		PO_PrivateView.checkElement(driver, "text", "user1@email.com");
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user2@email.com",
 				PO_View.getTimeout());	
@@ -232,25 +250,27 @@ public class NotaneitorTests {
 	//PR15. 
 	@Test
 	public void PR15() {
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");	
 
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
 		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
 		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
-		driver.navigate().to("https://localhost:8081/invitaciones");
+		//driver.navigate().to("https://localhost:8081/invitaciones");
+		PO_NavView.clickOption(driver, "invitaciones", "class", "btn btn-primary");
 		PO_View.checkElement(driver, "text", "prueba1@email.com");
 	}	
 
 	//PR16. 
 	@Test
 	public void PR16() {
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");	
 
+		//Se hace por url, no se puede calcar el botón porque está bloqueado
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
 		PO_View.checkElement(driver, "text", "Hay invitaciones pendientes entre usted y esa persona");
 	}	
@@ -260,34 +280,37 @@ public class NotaneitorTests {
 	public void PR17() {
 
 		//Enviar más peticiones a user1 desde otros usuarios
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user2@email.com", "123456");	
+		//TODO las pruebas deben simular la interaccion real del usuario,
+		//calcando botones, no yendo por urs's
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
 		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
 		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user3@email.com", "123456");	
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
 		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
 		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user4@email.com", "123456");	
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
 		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
 		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user5@email.com", "123456");	
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
 		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
 		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 
 		//Comprobar que las ha recibido user1
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
-		driver.navigate().to("https://localhost:8081/invitaciones");
+		//driver.navigate().to("https://localhost:8081/invitaciones");
+		PO_NavView.clickOption(driver, "invitaciones", "class", "btn btn-primary");
 		PO_View.checkElement(driver, "text", "prueba1@email.com");
 		PO_View.checkElement(driver, "text", "user2@email.com");
 		PO_View.checkElement(driver, "text", "user3@email.com");
@@ -300,11 +323,11 @@ public class NotaneitorTests {
 	@Test
 	public void PR18() {
 		//Se loguea user1
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 
 		//Acepta la petición de prueba1
-		driver.navigate().to("https://localhost:8081/invitaciones");
+		PO_NavView.clickOption(driver, "invitaciones", "class", "btn btn-primary");
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/prueba1@email.com");
 		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");			
 	}	
@@ -315,7 +338,7 @@ public class NotaneitorTests {
 	@Test
 	public void PR18_1() {
 		//Se loguea user1
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 
 		//Le intenta volver a invitar a prueba1
@@ -329,7 +352,7 @@ public class NotaneitorTests {
 	@Test
 	public void PR18_2() {
 		//Se loguea user1
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/user10@email.com");
@@ -343,7 +366,7 @@ public class NotaneitorTests {
 	@Test
 	public void PR18_3() {
 		//Se loguea user1
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/user1@email.com");
@@ -366,7 +389,7 @@ public class NotaneitorTests {
 	@Test
 	public void PR18_5() {
 		//Se loguea user1
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/userNoExistep14909472@email.com");
@@ -379,11 +402,11 @@ public class NotaneitorTests {
 	@Test
 	public void PR19() {
 		//Se loguea user1
-		driver.navigate().to("https://localhost:8081/identificarse");
+		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");		
 
 		//Acepta al resto de amigos que le han invitado
-		driver.navigate().to("https://localhost:8081/invitaciones");
+		PO_NavView.clickOption(driver, "invitaciones", "class", "btn btn-primary");
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/user2@email.com");
 		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");	
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/user3@email.com");
@@ -394,9 +417,7 @@ public class NotaneitorTests {
 		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");
 
 		//Va al listado de amigos
-		driver.navigate().to("https://localhost:8081/amigos");
-		//También se podría hacer así
-		//PO_RegisterView.clickOption(driver, "amigos", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "amigos", "class", "btn btn-primary");
 
 		//Comprobar que están los amigos
 		PO_View.checkElement(driver, "text", "prueba1@email.com");	
@@ -410,6 +431,7 @@ public class NotaneitorTests {
 	//P20. 
 	@Test
 	public void PR20() {
+		//No se puede calcar el botón porque no sale en pantalla, se intenta por url
 		driver.navigate().to("https://localhost:8081/amigos");	
 		PO_View.checkElement(driver, "text", "Identificación de usuario");	
 	}	
@@ -417,6 +439,7 @@ public class NotaneitorTests {
 	//PR21. 
 	@Test
 	public void PR21() {
+		//No se puede calcar el botón porque no sale en pantalla, se intenta por url
 		driver.navigate().to("https://localhost:8081/invitaciones");
 		PO_View.checkElement(driver, "text", "Identificación de usuario");				
 	}	

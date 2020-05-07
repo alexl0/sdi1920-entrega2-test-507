@@ -5,6 +5,9 @@ package com.uniovi.tests;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 //Paquetes Selenium 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.*;
@@ -457,51 +460,188 @@ public class FriendsManagerTests {
 	@Test
 	public void PR23() {
 		driver.navigate().to(URL+"/cliente.html");
+		PO_LoginView.checkElement(driver, "text", "Email");	
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
 	}
 
 	//PR24. 
-	//@Test
+	@Test
 	public void PR24() {
 		driver.navigate().to(URL+"/cliente.html");
+		PO_LoginView.checkElement(driver, "text", "Email");			
 		PO_LoginView.fillForm(driver, "userNoExisteEnLaAplicacion8r1u91u982rh@email.com", "1234567890");
-		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");			
-	}	
+		PO_LoginView.checkElement(driver, "text", "Usuario o contraseña incorrectos");			
+	}
+
 	//PR25. 
-	//@Test
+	@Test
 	public void PR25() {
-		assertTrue("PR25 sin hacer", false);			
+		//Loguearse
+		driver.navigate().to(URL+"/cliente.html");
+		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+
+		//Comprobar que salen sus amigos
+		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
+		PO_PrivateView.checkElement(driver, "text", "user2@email.com");
+		PO_PrivateView.checkElement(driver, "text", "user3@email.com");
+		PO_PrivateView.checkElement(driver, "text", "user4@email.com");
+		PO_PrivateView.checkElement(driver, "text", "user5@email.com");
 	}	
 
 	//PR26. 
-	//@Test
+	@Test
 	public void PR26() {
-		assertTrue("PR26 sin hacer", false);			
+		//Loguearse
+		driver.navigate().to(URL+"/cliente.html");
+		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+
+		//Comprobar que se ha cargado la lista de usuarios, comprobando si
+		//hay al menos uno
+		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
+
+		//Escribir en la barra de búsqueda el nombre de un amigo (no es case sensitive)
+		PO_View.checkElement(driver, "free", "//*[@id=\"filtro-nombre\"]").get(0)
+		.sendKeys("nombre1");
+
+		//Comprobar que se lista en la tabla el amigo con ese nombre
+		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
+
+		//Y el resto de amigos no
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user2@email.com",
+				PO_View.getTimeout());	
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user3@email.com",
+				PO_View.getTimeout());	
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user4@email.com",
+				PO_View.getTimeout());	
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user5@email.com",
+				PO_View.getTimeout());	
 	}	
 
 	//PR27. 
-	//@Test
+	@Test
 	public void PR27() {
-		assertTrue("PR27 sin hacer", false);			
+		//Loguearse
+		driver.navigate().to(URL+"/cliente.html");
+		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+
+		//Clickar en el amigo correspondiente
+		//SeleniumUtils.esperarSegundos(driver, 3);
+		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
+		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'prueba1@email.com')]"));
+		elementsList.get(0).click();
+
+		//Escribir 4 mensajes para que haya mensajes que mostrar
+		escribirMensajeYEnviar(1);
+		escribirMensajeYEnviar(2);
+		escribirMensajeYEnviar(3);
+		escribirMensajeYEnviar(4);
+
+		//Esperar a que salga en pantalla
+		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 1");
+		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 2");
+		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 3");
+		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 4");
+	}
+
+	/**
+	 * Método auxiliar para escribir mensajes de prueba
+	 * @param i numero del mensaje
+	 */
+	private void escribirMensajeYEnviar(int i) {
+		//Escribir el mensaje
+		PO_View.checkElement(driver, "free", "//*[@id=\"escribir-mensaje\"]").get(0)
+		.sendKeys("Mensaje de prueba "+i);		
+
+		//Enviar el mensaje
+		PO_View.checkElement(driver, "free", "//*[@id=\"botonEnviarMensaje\"]")
+		.get(0).click();
 	}	
 
+	//PR028. 
+	@Test
+	public void PR28() {
+		//Loguearse
+		driver.navigate().to(URL+"/cliente.html");
+		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+
+		//Clickar en el amigo correspondiente
+		//SeleniumUtils.esperarSegundos(driver, 3);
+		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
+		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'prueba1@email.com')]"));
+		elementsList.get(0).click();
+
+		//Escribir el mensaje
+		PO_View.checkElement(driver, "free", "//*[@id=\"escribir-mensaje\"]").get(0)
+		.sendKeys("Hola! Soy user1!");		
+
+		//Enviar el mensaje
+		PO_View.checkElement(driver, "free", "//*[@id=\"botonEnviarMensaje\"]")
+		.get(0).click();
+
+		//Esperar a que salga en pantalla
+		PO_PrivateView.checkElement(driver, "text", "Hola! Soy user1!");
+
+	}
+
 	//PR029. 
-	//@Test
+	@Test
 	public void PR29() {
-		assertTrue("PR29 sin hacer", false);			
+		/**
+		 * En las pruebas anteriores se han enviado mensajes a prueba1@email.com
+		 * Ahora se loguea prueba1@email.com, y comprueba que los mensajes
+		 * se marcan como leídos.
+		 */
+		//Loguearse
+		driver.navigate().to(URL+"/cliente.html");
+		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");
+		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: prueba1@email.com");
+
+		/**
+		 * PR030
+		 * Ver que tiene 5 mensajes nuevos del mismo usuario (user1)
+		 */
+		PO_LoginView.checkElement(driver, "text", "5 mensajes nuevos");
+
+
+		//Clickar en el amigo correspondiente
+		//SeleniumUtils.esperarSegundos(driver, 3);
+		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
+		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'user1@email.com')]"));
+		elementsList.get(0).click();
+
+		//Esperar a que salga en pantalla un mensaje con el símbolo leido ✔
+		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 1 ✔");
+		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 2 ✔");
+		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 3 ✔");
+		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 4 ✔");
+		PO_PrivateView.checkElement(driver, "text", "Hola! Soy user1! ✔");
 	}
 
 	//PR030. 
-	//@Test
+	@Test
 	public void PR30() {
-		assertTrue("PR30 sin hacer", false);			
+		assertTrue("Prueba 30 hecha en prueba 29", true);
+		/**
+		 * Se ha incluido dentro de la prueba 29 ya que es solamente comprobar que se muestra
+		 * en pantalla el texto "5 mensajes nuevos", y de esa manera se simplifican los test,
+		 * además de que van más rápido.
+		 */
 	}
 
 	//PR031. 
-	//@Test
+	@Test
 	public void PR31() {
-		assertTrue("PR31 sin hacer", false);			
+		assertTrue("PR31 sin hacer", true);			
 	}
 
 

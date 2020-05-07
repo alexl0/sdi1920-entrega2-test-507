@@ -64,14 +64,14 @@ public class FriendsManagerTests {
 		//En una aplicación comercial no se haría esto bajo ninguna
 		//circunstancia. Solo tiene la intención de facilitar la
 		//ejecución de los test.
-		/*driver.navigate().to(URL+"/borrarUsuarios");
+		driver.navigate().to(URL+"/borrarUsuarios");
 
 		//Crear de nuevo los usuarios de prueba
 		for(int i=1;i<13;i++) {
 			PO_RegisterView.clickOption(driver, "registrarse", "class", "btn btn-primary");
 			PO_RegisterView.fillForm(driver, "user"+i+"@email.com", "user"+i, "user"+i, "123456", "123456");	
 		}
-		 */
+
 	}
 	@AfterClass
 	static public void end() {
@@ -649,8 +649,9 @@ public class FriendsManagerTests {
 		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
 
 		//Averiguar cual es el amigo que está más arriba
-		List<WebElement> elementsListAbajo = PO_View.checkElement(driver, "free", "//tbody/tr[5]/td[5][contains(text(),'@')]");
+		List<WebElement> elementsListAbajo = PO_View.checkElement(driver, "free", "//tbody/tr[5]/td[1][contains(text(),'@')]");
 		String emailMasAbajo = elementsListAbajo.get(0).getText();
+		System.out.println(emailMasAbajo);
 
 		//Clickar en el amigo correspondiente
 		//SeleniumUtils.esperarSegundos(driver, 3);
@@ -673,9 +674,13 @@ public class FriendsManagerTests {
 		List<WebElement> elementsList2 = driver.findElements(By.xpath("//*[contains(text(),'Amigos')]"));
 		elementsList2.get(0).click();
 
+		//Esperar a que cargue la página
+		PO_LoginView.checkElement(driver, "text", emailMasAbajo);
+
 		//Averiguar cual es el amigo que está más arriba
 		List<WebElement> elementsListArriba = PO_View.checkElement(driver, "free", "//tbody/tr[1]/td[1][contains(text(),'@')]");
 		String emailMasArriba = elementsListArriba.get(0).getText();
+		System.out.println(emailMasArriba);
 
 		//Comprobamos que ahora el que está arriba, era el que estaba antes abajo.
 		Assert.assertTrue(emailMasArriba==emailMasAbajo);

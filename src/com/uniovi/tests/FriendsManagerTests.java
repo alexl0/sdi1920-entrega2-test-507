@@ -639,36 +639,41 @@ public class FriendsManagerTests {
 		 */
 	}
 
-	//PR031. 
+	/**
+	 * El teset pr031 se ha dividido en dos porque tiene dos claras partes.
+	 * PR031 parte 1
+	 * 		-Loguearse con user1@email.com (tiene varios amigos)
+	 * 		-Enviarle un mensaje al amigo que está más abajo
+	 * 		-Volver a la vista de amigos y comprobar que ahora está arriba del todo.
+	 */
 	@Test
-	public void PR31() {
+	public void PR31_parte1() {
 		//Loguearse
 		driver.navigate().to(URL+"/cliente.html");
 		PO_LoginView.checkElement(driver, "text", "Email");	
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
 
-		//Averiguar cual es el amigo que está más arriba
+		//Averiguar cual es el amigo que está más abajo
 		List<WebElement> elementsListAbajo = PO_View.checkElement(driver, "free", "//tbody/tr[5]/td[1][contains(text(),'@')]");
 		String emailMasAbajo = elementsListAbajo.get(0).getText();
-		System.out.println(emailMasAbajo);
 
-		//Clickar en el amigo correspondiente
-		//SeleniumUtils.esperarSegundos(driver, 3);
+		//Clickar en el amigo de más abajo
 		PO_PrivateView.checkElement(driver, "text", emailMasAbajo);
 		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'"+emailMasAbajo+"')]"));
 		elementsList.get(0).click();
 
 		//Escribir el mensaje
+		String mensaje="Hola "+emailMasAbajo+"! Soy user1! Hacía tiempo que no hablabamos.";
 		PO_View.checkElement(driver, "free", "//*[@id=\"escribir-mensaje\"]").get(0)
-		.sendKeys("Hola user5! Soy user1! Hacía tiempo que no hablabamos.");		
+		.sendKeys(mensaje);		
 
 		//Enviar el mensaje
 		PO_View.checkElement(driver, "free", "//*[@id=\"botonEnviarMensaje\"]")
 		.get(0).click();
 
 		//Esperar a que salga en pantalla
-		PO_PrivateView.checkElement(driver, "text", "Hola user5! Soy user1! Hacía tiempo que no hablabamos.");
+		PO_PrivateView.checkElement(driver, "text", mensaje);
 
 		//Volver a amigos
 		List<WebElement> elementsList2 = driver.findElements(By.xpath("//*[contains(text(),'Amigos')]"));
@@ -680,12 +685,71 @@ public class FriendsManagerTests {
 		//Averiguar cual es el amigo que está más arriba
 		List<WebElement> elementsListArriba = PO_View.checkElement(driver, "free", "//tbody/tr[1]/td[1][contains(text(),'@')]");
 		String emailMasArriba = elementsListArriba.get(0).getText();
-		System.out.println(emailMasArriba);
 
 		//Comprobamos que ahora el que está arriba, era el que estaba antes abajo.
 		Assert.assertTrue(emailMasArriba==emailMasAbajo);
 	}
 
+	/**
+	 * PR031 parte 2
+	 * 		-Loguearse con user1@email.com (tiene varios amigos)
+	 * 		-Ver cual es el email del amigo que está más abajo
+	 * 		-Loguearse con el email del amigo que estaba abajo del todo
+	 * 		-Enviarle un mensaje a user1@email.com
+	 * 		-Loguearse con user1 y ver que el amigo que antes aparecía
+	 * 			abajo ahora aparece arriba del todo
+	 */
+	@Test
+	public void PR31_parte2() {
+		//Loguearse con user1@email.com
+		driver.navigate().to(URL+"/cliente.html");
+		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+
+		//Averiguar cual es el amigo que está más abajo
+		List<WebElement> elementsListAbajo = PO_View.checkElement(driver, "free", "//tbody/tr[5]/td[1][contains(text(),'@')]");
+		String emailMasAbajo = elementsListAbajo.get(0).getText();
+
+		//Loguearse con el email del que estaba más abajo
+		driver.navigate().to(URL+"/cliente.html");
+		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_LoginView.fillForm(driver, emailMasAbajo, "123456");
+		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: "+emailMasAbajo);
+
+		//Clickar en user1@email.com
+		PO_PrivateView.checkElement(driver, "text", "user1@email.com");
+		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'"+"user1@email.com"+"')]"));
+		elementsList.get(0).click();
+
+		//Escribir el mensaje
+		String mensaje="Hola "+"user1@email.com"+"! Soy "+emailMasAbajo+"! Hacía tiempo que no hablabamos.";
+		PO_View.checkElement(driver, "free", "//*[@id=\"escribir-mensaje\"]").get(0)
+		.sendKeys(mensaje);		
+
+		//Enviar el mensaje
+		PO_View.checkElement(driver, "free", "//*[@id=\"botonEnviarMensaje\"]")
+		.get(0).click();
+
+		//Esperar a que salga en pantalla
+		PO_PrivateView.checkElement(driver, "text", mensaje);
+
+		//Loguearse con user1@email.com de nuevo
+		driver.navigate().to(URL+"/cliente.html");
+		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+
+		//Esperar a que cargue la página
+		PO_LoginView.checkElement(driver, "text", emailMasAbajo);
+
+		//Averiguar cual es el amigo que está más arriba
+		List<WebElement> elementsListArriba = PO_View.checkElement(driver, "free", "//tbody/tr[1]/td[1][contains(text(),'@')]");
+		String emailMasArriba = elementsListArriba.get(0).getText();
+
+		//Comprobamos que ahora el que está arriba, era el que estaba antes abajo.
+		Assert.assertTrue(emailMasArriba==emailMasAbajo);
+	}
 
 }
 

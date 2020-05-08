@@ -532,7 +532,6 @@ public class FriendsManagerTests {
 		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
 
 		//Clickar en el amigo correspondiente
-		//SeleniumUtils.esperarSegundos(driver, 3);
 		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
 		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'prueba1@email.com')]"));
 		elementsList.get(0).click();
@@ -575,7 +574,6 @@ public class FriendsManagerTests {
 		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
 
 		//Clickar en el amigo correspondiente
-		//SeleniumUtils.esperarSegundos(driver, 3);
 		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
 		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'prueba1@email.com')]"));
 		elementsList.get(0).click();
@@ -615,7 +613,6 @@ public class FriendsManagerTests {
 
 
 		//Clickar en el amigo correspondiente
-		//SeleniumUtils.esperarSegundos(driver, 3);
 		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
 		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'user1@email.com')]"));
 		elementsList.get(0).click();
@@ -661,7 +658,6 @@ public class FriendsManagerTests {
 		//Averiguar cual es el amigo que está más abajo
 		List<WebElement> elementsListAbajo = PO_View.checkElement(driver, "free", "//tbody/tr[3]/td[1][contains(text(),'@')]");
 		String emailMasAbajo = elementsListAbajo.get(0).getText();
-		SeleniumUtils.esperarSegundos(driver, 5);
 		//Clickar en el amigo de más abajo
 		PO_PrivateView.checkElement(driver, "text", emailMasAbajo);
 		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'"+emailMasAbajo+"')]"));
@@ -685,7 +681,6 @@ public class FriendsManagerTests {
 
 		//Esperar a que cargue la página
 		PO_LoginView.checkElement(driver, "text", emailMasAbajo);
-		SeleniumUtils.esperarSegundos(driver, 5);
 		//Averiguar cual es el amigo que está más arriba
 		List<WebElement> elementsListArriba = PO_View.checkElement(driver, "free", "//tbody/tr[1]/td[1][contains(text(),'@')]");
 		String emailMasArriba = elementsListArriba.get(0).getText();

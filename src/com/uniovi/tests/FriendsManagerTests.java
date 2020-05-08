@@ -64,14 +64,14 @@ public class FriendsManagerTests {
 		//En una aplicación comercial no se haría esto bajo ninguna
 		//circunstancia. Solo tiene la intención de facilitar la
 		//ejecución de los test.
-	/*	driver.navigate().to(URL+"/borrarUsuarios");
+		driver.navigate().to(URL+"/borrarUsuarios");
 
 		//Crear de nuevo los usuarios de prueba
 		for(int i=1;i<13;i++) {
 			PO_NavView.clickOption(driver, "registrarse", "class", "btn btn-primary");
 			PO_RegisterView.fillForm(driver, "user"+i+"@email.com", "user"+i, "user"+i, "123456", "123456");	
 		}
-*/
+
 	}
 	@AfterClass
 	static public void end() {

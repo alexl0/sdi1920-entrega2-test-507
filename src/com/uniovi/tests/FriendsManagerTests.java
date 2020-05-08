@@ -474,6 +474,24 @@ public class FriendsManagerTests {
 		PO_View.checkElement(driver, "text", "Usuario o contraseña incorrectos");			
 	}
 
+	//PR24. Contraseña vacía
+	@Test
+	public void PR24_1() {
+		driver.navigate().to(URL+"/cliente.html");
+		PO_View.checkElement(driver, "text", "Email");			
+		PO_LoginView.fillForm(driver, "userNoExisteEnLaAplicacion8r1u91u982rh@email.com", "");
+		PO_View.checkElement(driver, "text", "Contraseña requerida");			
+	}
+
+	//PR24. Email vacío
+	@Test
+	public void PR24_2() {
+		driver.navigate().to(URL+"/cliente.html");
+		PO_View.checkElement(driver, "text", "Email");			
+		PO_LoginView.fillForm(driver, "", "12345678");
+		PO_View.checkElement(driver, "text", "Email requerido");			
+	}
+
 	//PR25. 
 	@Test
 	public void PR25() {
@@ -589,6 +607,43 @@ public class FriendsManagerTests {
 		//Esperar a que salga en pantalla
 		PO_View.checkElement(driver, "text", "Hola! Soy user1!");
 
+	}
+
+	/**
+	 * PR028. Probar que no se pueden enviar mensajes de más de 400 caracteres
+	 * No se puede probar enviar el mensaje vacío porque el botón está bloqueado
+	 * a no ser que se introduzca texto de más de 1 caracter y menos de 400.
+	 */
+	@Test
+	public void PR28_1() {
+		//Loguearse
+		driver.navigate().to(URL+"/cliente.html");
+		PO_View.checkElement(driver, "text", "Email");	
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+		PO_View.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+
+		//Clickar en el amigo correspondiente
+		PO_View.checkElement(driver, "text", "prueba1@email.com");
+		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'prueba1@email.com')]"));
+		elementsList.get(0).click();
+
+		//Escribir el mensaje
+		PO_View.checkElement(driver, "free", "//*[@id=\"escribir-mensaje\"]").get(0)
+		.sendKeys("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+				+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+				+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+				+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");		
+
+		//Esperar a que salga en pantalla el error
+		PO_View.checkElement(driver, "text", "No se pueden enviar mensajes de más de 400 caracteres");
+
+		//Escribir el mensaje
+		PO_View.checkElement(driver, "free", "//*[@id=\"escribir-mensaje\"]").get(0)
+		.sendKeys("Mensaje normal, con un numero de caracteres normal");
+
+		//Comprobar que se ha quitado el error
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "No se pueden enviar mensajes de más de 400 caracteres",
+				PO_View.getTimeout());	
 	}
 
 	//PR029. 

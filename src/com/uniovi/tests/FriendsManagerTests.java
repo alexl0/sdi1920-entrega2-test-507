@@ -68,7 +68,7 @@ public class FriendsManagerTests {
 
 		//Crear de nuevo los usuarios de prueba
 		for(int i=1;i<13;i++) {
-			PO_RegisterView.clickOption(driver, "registrarse", "class", "btn btn-primary");
+			PO_NavView.clickOption(driver, "registrarse", "class", "btn btn-primary");
 			PO_RegisterView.fillForm(driver, "user"+i+"@email.com", "user"+i, "user"+i, "123456", "123456");	
 		}
 
@@ -82,7 +82,7 @@ public class FriendsManagerTests {
 	//PR01. 
 	@Test
 	public void PR01() {
-		PO_RegisterView.clickOption(driver, "registrarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "registrarse", "class", "btn btn-primary");
 		PO_RegisterView.fillForm(driver, "prueba1@email.com", "Nombre1", "Apellido1 Apellido1", "123456", "123456");
 		PO_View.checkElement(driver, "text", "Nuevo usuario registrado");
 	}
@@ -90,14 +90,14 @@ public class FriendsManagerTests {
 	//PR02. 
 	@Test
 	public void PR02() {
-		PO_RegisterView.clickOption(driver, "registrarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "registrarse", "class", "btn btn-primary");
 		PO_RegisterView.fillForm(driver, "", "", "", "123456", "123456");	
 	}
 
 	//PR03. 
 	@Test
 	public void PR03() {
-		PO_RegisterView.clickOption(driver, "registrarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "registrarse", "class", "btn btn-primary");
 		PO_RegisterView.fillForm(driver, "prueba2@email.com", "Nombre1", "Apellido1 Apellido1", "1234567", "123456");	
 		PO_View.checkElement(driver, "text", "Las contraseñas no coinciden");
 	}
@@ -105,7 +105,7 @@ public class FriendsManagerTests {
 	//PR04. 
 	@Test
 	public void PR04() {
-		PO_RegisterView.clickOption(driver, "registrarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "registrarse", "class", "btn btn-primary");
 		PO_RegisterView.fillForm(driver, "prueba1@email.com", "Nombre1", "Apellido1 Apellido1", "123456", "123456");
 		PO_View.checkElement(driver, "text", "Este email ya está registrado");		
 	}
@@ -113,16 +113,16 @@ public class FriendsManagerTests {
 	//PR05. 
 	@Test
 	public void PR05() {
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");
-		PO_LoginView.checkElement(driver, "text", "Usuarios");
-		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+		PO_View.checkElement(driver, "text", "Usuarios");
+		PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 	}
 
 	//PR06. 
 	@Test
 	public void PR06() {	
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "", "");
 		PO_View.checkElement(driver, "text", "Identificación de usuario");
 	}
@@ -130,28 +130,28 @@ public class FriendsManagerTests {
 	//PR07. 
 	@Test
 	public void PR07() {
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "prueba1@email.com", "1234567");
-		PO_LoginView.checkElement(driver, "text", "Email o password incorrecto");
+		PO_View.checkElement(driver, "text", "Email o password incorrecto");
 	}	
 
 	//PR08. 
 	@Test
 	public void PR08() {
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "prueba1noexistente@email.com", "1234567");
-		PO_LoginView.checkElement(driver, "text", "Email o password incorrecto");			
+		PO_View.checkElement(driver, "text", "Email o password incorrecto");			
 	}	
 
 	//PR09. 
 	@Test
 	public void PR09() {
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");
-		PO_LoginView.checkElement(driver, "text", "Usuarios");
-		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
-		PO_LoginView.checkElement(driver, "text", "Se ha desconectado con éxito.");
-		PO_LoginView.checkElement(driver, "text", "Identificación de usuario");
+		PO_View.checkElement(driver, "text", "Usuarios");
+		PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+		PO_View.checkElement(driver, "text", "Se ha desconectado con éxito.");
+		PO_View.checkElement(driver, "text", "Identificación de usuario");
 	}	
 	//PR10. 
 	@Test
@@ -163,7 +163,7 @@ public class FriendsManagerTests {
 	//PR11. 
 	@Test
 	public void PR11() {
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");
 		PO_View.checkElement(driver, "text", "user1@email.com");
 		PO_View.checkElement(driver, "text", "user2@email.com");
@@ -186,7 +186,7 @@ public class FriendsManagerTests {
 	//PR12. 
 	@Test
 	public void PR12() {
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 		//Escribir en la barra de búsqueda
 		PO_View.checkElement(driver, "free", "//*[@id=\"searchText\"]").get(0)
@@ -194,17 +194,17 @@ public class FriendsManagerTests {
 		// Ahora hacemos click en buscar
 		PO_View.checkElement(driver, "free", "//*[@id=\"searchButton\"]")
 		.get(0).click();
-		PO_PrivateView.checkElement(driver, "text", "user2@email.com");
-		PO_PrivateView.checkElement(driver, "text", "user3@email.com");
-		PO_PrivateView.checkElement(driver, "text", "user4@email.com");
-		PO_PrivateView.checkElement(driver, "text", "user5@email.com");
-		PO_PrivateView.checkElement(driver, "text", "user6@email.com");
+		PO_View.checkElement(driver, "text", "user2@email.com");
+		PO_View.checkElement(driver, "text", "user3@email.com");
+		PO_View.checkElement(driver, "text", "user4@email.com");
+		PO_View.checkElement(driver, "text", "user5@email.com");
+		PO_View.checkElement(driver, "text", "user6@email.com");
 	}	
 
 	//PR13. 
 	@Test
 	public void PR13() {
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 		//Escribir en la barra de búsqueda
 		PO_View.checkElement(driver, "free", "//*[@id=\"searchText\"]").get(0)
@@ -229,7 +229,7 @@ public class FriendsManagerTests {
 	//PR14. 
 	@Test
 	public void PR14() {
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");
 		//Escribir en la barra de búsqueda
 		PO_View.checkElement(driver, "free", "//*[@id=\"searchText\"]").get(0)
@@ -237,7 +237,7 @@ public class FriendsManagerTests {
 		// Ahora hacemos click en buscar
 		PO_View.checkElement(driver, "free", "//*[@id=\"searchButton\"]")
 		.get(0).click();
-		PO_PrivateView.checkElement(driver, "text", "user1@email.com");
+		PO_View.checkElement(driver, "text", "user1@email.com");
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user2@email.com",
 				PO_View.getTimeout());	
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user3@email.com",
@@ -253,14 +253,14 @@ public class FriendsManagerTests {
 	//PR15. 
 	@Test
 	public void PR15() {
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");	
 
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
 		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
-		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 		//driver.navigate().to("https://localhost:8081/invitaciones");
 		PO_NavView.clickOption(driver, "invitaciones", "class", "btn btn-primary");
@@ -270,7 +270,7 @@ public class FriendsManagerTests {
 	//PR16. 
 	@Test
 	public void PR16() {
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");	
 
 		//Se hace por url, no se puede calcar el botón porque está bloqueado
@@ -283,34 +283,34 @@ public class FriendsManagerTests {
 	public void PR17() {
 
 		//Enviar más peticiones a user1 desde otros usuarios
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user2@email.com", "123456");	
 		//TODO las pruebas deben simular la interaccion real del usuario,
 		//calcando botones, no yendo por urs's
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
 		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
-		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user3@email.com", "123456");	
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
 		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
-		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user4@email.com", "123456");	
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
 		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
-		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user5@email.com", "123456");	
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
 		PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
-		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 
 		//Comprobar que las ha recibido user1
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 		//driver.navigate().to("https://localhost:8081/invitaciones");
 		PO_NavView.clickOption(driver, "invitaciones", "class", "invitaciones");
@@ -325,7 +325,7 @@ public class FriendsManagerTests {
 	@Test
 	public void PR18() {
 		//Se loguea user1
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 
 		//Acepta la petición de prueba1
@@ -340,7 +340,7 @@ public class FriendsManagerTests {
 	@Test
 	public void PR18_1() {
 		//Se loguea user1
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 
 		//Le intenta volver a invitar a prueba1
@@ -354,7 +354,7 @@ public class FriendsManagerTests {
 	@Test
 	public void PR18_2() {
 		//Se loguea user1
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/user10@email.com");
@@ -368,7 +368,7 @@ public class FriendsManagerTests {
 	@Test
 	public void PR18_3() {
 		//Se loguea user1
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/user1@email.com");
@@ -391,7 +391,7 @@ public class FriendsManagerTests {
 	@Test
 	public void PR18_5() {
 		//Se loguea user1
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
 
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/userNoExistep14909472@email.com");
@@ -403,7 +403,7 @@ public class FriendsManagerTests {
 	@Test
 	public void PR19() {
 		//Se loguea user1
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");		
 
 		//Acepta al resto de amigos que le han invitado
@@ -460,18 +460,18 @@ public class FriendsManagerTests {
 	@Test
 	public void PR23() {
 		driver.navigate().to(URL+"/cliente.html");
-		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_View.checkElement(driver, "text", "Email");	
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
-		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+		PO_View.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
 	}
 
 	//PR24. 
 	@Test
 	public void PR24() {
 		driver.navigate().to(URL+"/cliente.html");
-		PO_LoginView.checkElement(driver, "text", "Email");			
+		PO_View.checkElement(driver, "text", "Email");			
 		PO_LoginView.fillForm(driver, "userNoExisteEnLaAplicacion8r1u91u982rh@email.com", "1234567890");
-		PO_LoginView.checkElement(driver, "text", "Usuario o contraseña incorrectos");			
+		PO_View.checkElement(driver, "text", "Usuario o contraseña incorrectos");			
 	}
 
 	//PR25. 
@@ -479,16 +479,16 @@ public class FriendsManagerTests {
 	public void PR25() {
 		//Loguearse
 		driver.navigate().to(URL+"/cliente.html");
-		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_View.checkElement(driver, "text", "Email");	
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
-		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+		PO_View.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
 
 		//Comprobar que salen sus amigos
-		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
-		PO_PrivateView.checkElement(driver, "text", "user2@email.com");
-		PO_PrivateView.checkElement(driver, "text", "user3@email.com");
-		PO_PrivateView.checkElement(driver, "text", "user4@email.com");
-		PO_PrivateView.checkElement(driver, "text", "user5@email.com");
+		PO_View.checkElement(driver, "text", "prueba1@email.com");
+		PO_View.checkElement(driver, "text", "user2@email.com");
+		PO_View.checkElement(driver, "text", "user3@email.com");
+		PO_View.checkElement(driver, "text", "user4@email.com");
+		PO_View.checkElement(driver, "text", "user5@email.com");
 	}	
 
 	//PR26. 
@@ -496,20 +496,20 @@ public class FriendsManagerTests {
 	public void PR26() {
 		//Loguearse
 		driver.navigate().to(URL+"/cliente.html");
-		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_View.checkElement(driver, "text", "Email");	
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
-		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+		PO_View.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
 
 		//Comprobar que se ha cargado la lista de usuarios, comprobando si
 		//hay al menos uno
-		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
+		PO_View.checkElement(driver, "text", "prueba1@email.com");
 
 		//Escribir en la barra de búsqueda el nombre de un amigo (no es case sensitive)
 		PO_View.checkElement(driver, "free", "//*[@id=\"filtro-nombre\"]").get(0)
 		.sendKeys("nombre1");
 
 		//Comprobar que se lista en la tabla el amigo con ese nombre
-		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
+		PO_View.checkElement(driver, "text", "prueba1@email.com");
 
 		//Y el resto de amigos no
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user2@email.com",
@@ -527,12 +527,12 @@ public class FriendsManagerTests {
 	public void PR27() {
 		//Loguearse
 		driver.navigate().to(URL+"/cliente.html");
-		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_View.checkElement(driver, "text", "Email");	
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
-		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+		PO_View.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
 
 		//Clickar en el amigo correspondiente
-		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
+		PO_View.checkElement(driver, "text", "prueba1@email.com");
 		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'prueba1@email.com')]"));
 		elementsList.get(0).click();
 
@@ -543,10 +543,10 @@ public class FriendsManagerTests {
 		escribirMensajeYEnviar(4);
 
 		//Esperar a que salga en pantalla
-		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 1");
-		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 2");
-		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 3");
-		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 4");
+		PO_View.checkElement(driver, "text", "Mensaje de prueba 1");
+		PO_View.checkElement(driver, "text", "Mensaje de prueba 2");
+		PO_View.checkElement(driver, "text", "Mensaje de prueba 3");
+		PO_View.checkElement(driver, "text", "Mensaje de prueba 4");
 	}
 
 	/**
@@ -569,12 +569,12 @@ public class FriendsManagerTests {
 	public void PR28() {
 		//Loguearse
 		driver.navigate().to(URL+"/cliente.html");
-		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_View.checkElement(driver, "text", "Email");	
 		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
-		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+		PO_View.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
 
 		//Clickar en el amigo correspondiente
-		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
+		PO_View.checkElement(driver, "text", "prueba1@email.com");
 		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'prueba1@email.com')]"));
 		elementsList.get(0).click();
 
@@ -587,7 +587,7 @@ public class FriendsManagerTests {
 		.get(0).click();
 
 		//Esperar a que salga en pantalla
-		PO_PrivateView.checkElement(driver, "text", "Hola! Soy user1!");
+		PO_View.checkElement(driver, "text", "Hola! Soy user1!");
 
 	}
 
@@ -601,28 +601,28 @@ public class FriendsManagerTests {
 		 */
 		//Loguearse
 		driver.navigate().to(URL+"/cliente.html");
-		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_View.checkElement(driver, "text", "Email");	
 		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");
-		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: prueba1@email.com");
+		PO_View.checkElement(driver, "text", "Usuario en sesión: prueba1@email.com");
 
 		/**
 		 * PR030
 		 * Ver que tiene 5 mensajes nuevos del mismo usuario (user1)
 		 */
-		PO_LoginView.checkElement(driver, "text", "5 mensajes nuevos");
+		PO_View.checkElement(driver, "text", "5 mensajes nuevos");
 
 
 		//Clickar en el amigo correspondiente
-		PO_PrivateView.checkElement(driver, "text", "prueba1@email.com");
+		PO_View.checkElement(driver, "text", "prueba1@email.com");
 		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'user1@email.com')]"));
 		elementsList.get(0).click();
 
 		//Esperar a que salga en pantalla un mensaje con el símbolo leido ✔
-		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 1 ✔");
-		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 2 ✔");
-		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 3 ✔");
-		PO_PrivateView.checkElement(driver, "text", "Mensaje de prueba 4 ✔");
-		PO_PrivateView.checkElement(driver, "text", "Hola! Soy user1! ✔");
+		PO_View.checkElement(driver, "text", "Mensaje de prueba 1 ✔");
+		PO_View.checkElement(driver, "text", "Mensaje de prueba 2 ✔");
+		PO_View.checkElement(driver, "text", "Mensaje de prueba 3 ✔");
+		PO_View.checkElement(driver, "text", "Mensaje de prueba 4 ✔");
+		PO_View.checkElement(driver, "text", "Hola! Soy user1! ✔");
 	}
 
 	//PR030. 
@@ -651,15 +651,16 @@ public class FriendsManagerTests {
 
 		//Loguearse
 		driver.navigate().to(URL+"/cliente.html");
-		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_View.checkElement(driver, "text", "Email");	
 		PO_LoginView.fillForm(driver, "user2@email.com", "123456");
-		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user2@email.com");
+		PO_View.checkElement(driver, "text", "Usuario en sesión: user2@email.com");
 
 		//Averiguar cual es el amigo que está más abajo
-		List<WebElement> elementsListAbajo = PO_View.checkElement(driver, "free", "//tbody/tr[3]/td[1][contains(text(),'@')]");
+		List<WebElement> elementsListAbajo = PO_View.checkElement(driver, "free", "//tbody/tr[4]/td[1][contains(text(),'@')]");
 		String emailMasAbajo = elementsListAbajo.get(0).getText();
+
 		//Clickar en el amigo de más abajo
-		PO_PrivateView.checkElement(driver, "text", emailMasAbajo);
+		PO_View.checkElement(driver, "text", emailMasAbajo);
 		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'"+emailMasAbajo+"')]"));
 		elementsList.get(0).click();
 
@@ -673,42 +674,50 @@ public class FriendsManagerTests {
 		.get(0).click();
 
 		//Esperar a que salga en pantalla
-		PO_PrivateView.checkElement(driver, "text", mensaje);
+		PO_View.checkElement(driver, "text", mensaje);
 
 		//Volver a amigos
 		List<WebElement> elementsList2 = driver.findElements(By.xpath("//*[contains(text(),'Amigos')]"));
 		elementsList2.get(0).click();
 
 		//Esperar a que cargue la página
-		PO_LoginView.checkElement(driver, "text", emailMasAbajo);
-		//Averiguar cual es el amigo que está más arriba
-		List<WebElement> elementsListArriba = PO_View.checkElement(driver, "free", "//tbody/tr[1]/td[1][contains(text(),'@')]");
-		String emailMasArriba = elementsListArriba.get(0).getText();
+		PO_View.checkElement(driver, "text", emailMasAbajo);
 
+		//Averiguar cual es el amigo que está más arriba
 		//Comprobamos que ahora el que está arriba, era el que estaba antes abajo.
-		System.out.println(emailMasArriba + emailMasAbajo);
-		Assert.assertEquals(emailMasArriba,emailMasAbajo);
+		PO_View.checkElement(driver, "free", "//tbody/tr[1]/td[1][contains(text(),'"+emailMasAbajo+"')]");
 	}
 
-	//Crea los usuarios necesarios para ejecutar PR31_parte1()
+	/**
+	 * Crea los usuarios necesarios para ejecutar PR31_parte1()
+	 * Realmente no se prueba nada en éste método. Solo se prepara el
+	 * entorno de pruebas
+	 */
 	private void prepararPR31_parte1() {
 
 		driver.navigate().to("https://localhost:8081");
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user3@email.com", "123456");	
-		PO_LoginView.checkElement(driver, "text", "Usuarios");
+		PO_View.checkElement(driver, "text", "Usuarios");
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user2@email.com");
-		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 
 		driver.navigate().to("https://localhost:8081");
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user4@email.com", "123456");	
-		PO_LoginView.checkElement(driver, "text", "Usuarios");
+		PO_View.checkElement(driver, "text", "Usuarios");
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user2@email.com");
-		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+
+		driver.navigate().to("https://localhost:8081");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "user5@email.com", "123456");	
+		PO_View.checkElement(driver, "text", "Usuarios");
+		driver.navigate().to("https://localhost:8081/usuario/invitar/user2@email.com");
+		PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 
 		//Se loguea user2
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user2@email.com", "123456");
 
 		//Aceptar las invitaciones
@@ -716,6 +725,8 @@ public class FriendsManagerTests {
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/user3@email.com");
 		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");	
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/user4@email.com");
+		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");
+		driver.navigate().to("https://localhost:8081/usuario/aceptar/user5@email.com");
 		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");
 
 	}
@@ -737,9 +748,9 @@ public class FriendsManagerTests {
 
 		//Loguearse con user1@email.com
 		driver.navigate().to(URL+"/cliente.html");
-		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_View.checkElement(driver, "text", "Email");	
 		PO_LoginView.fillForm(driver, "user6@email.com", "123456");
-		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user6@email.com");
+		PO_View.checkElement(driver, "text", "Usuario en sesión: user6@email.com");
 
 		//Averiguar cual es el amigo que está más abajo
 		List<WebElement> elementsListAbajo = PO_View.checkElement(driver, "free", "//tbody/tr[3]/td[1][contains(text(),'@')]");
@@ -747,12 +758,12 @@ public class FriendsManagerTests {
 
 		//Loguearse con el email del que estaba más abajo
 		driver.navigate().to(URL+"/cliente.html");
-		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_View.checkElement(driver, "text", "Email");	
 		PO_LoginView.fillForm(driver, emailMasAbajo, "123456");
-		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: "+emailMasAbajo);
+		PO_View.checkElement(driver, "text", "Usuario en sesión: "+emailMasAbajo);
 
 		//Clickar en user6@email.com
-		PO_PrivateView.checkElement(driver, "text", "user6@email.com");
+		PO_View.checkElement(driver, "text", "user6@email.com");
 		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'"+"user6@email.com"+"')]"));
 		elementsList.get(0).click();
 
@@ -766,44 +777,52 @@ public class FriendsManagerTests {
 		.get(0).click();
 
 		//Esperar a que salga en pantalla
-		PO_PrivateView.checkElement(driver, "text", mensaje);
+		PO_View.checkElement(driver, "text", mensaje);
 
 		//Loguearse con user1@email.com de nuevo
 		driver.navigate().to(URL+"/cliente.html");
-		PO_LoginView.checkElement(driver, "text", "Email");	
+		PO_View.checkElement(driver, "text", "Email");	
 		PO_LoginView.fillForm(driver, "user6@email.com", "123456");
-		PO_LoginView.checkElement(driver, "text", "Usuario en sesión: user6@email.com");
+		PO_View.checkElement(driver, "text", "Usuario en sesión: user6@email.com");
 
 		//Esperar a que cargue la página
-		PO_LoginView.checkElement(driver, "text", emailMasAbajo);
+		PO_View.checkElement(driver, "text", emailMasAbajo);
 
 		//Averiguar cual es el amigo que está más arriba
-		List<WebElement> elementsListArriba = PO_View.checkElement(driver, "free", "//tbody/tr[1]/td[1][contains(text(),'@')]");
-		String emailMasArriba = elementsListArriba.get(0).getText();
-
 		//Comprobamos que ahora el que está arriba, era el que estaba antes abajo.
-		Assert.assertEquals(emailMasArriba, emailMasAbajo);
+		PO_View.checkElement(driver, "free", "//tbody/tr[1]/td[1][contains(text(),'"+emailMasAbajo+"')]");
 	}
 
-	//Crea los usuarios necesarios para ejecutar PR31_parte1()
+	/**
+	 * Crea los usuarios necesarios para ejecutar PR31_parte2()
+	 * Realmente no se prueba nada en éste método. Solo se prepara el
+	 * entorno de pruebas
+	 */
 	private void prepararPR31_parte2() {
 
 		driver.navigate().to("https://localhost:8081");
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user7@email.com", "123456");	
-		PO_LoginView.checkElement(driver, "text", "Usuarios");
+		PO_View.checkElement(driver, "text", "Usuarios");
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user6@email.com");
-		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 
 		driver.navigate().to("https://localhost:8081");
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user8@email.com", "123456");	
-		PO_LoginView.checkElement(driver, "text", "Usuarios");
+		PO_View.checkElement(driver, "text", "Usuarios");
 		driver.navigate().to("https://localhost:8081/usuario/invitar/user6@email.com");
-		PO_LoginView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
+
+		driver.navigate().to("https://localhost:8081");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "user9@email.com", "123456");	
+		PO_View.checkElement(driver, "text", "Usuarios");
+		driver.navigate().to("https://localhost:8081/usuario/invitar/user6@email.com");
+		PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
 
 		//Se loguea user6
-		PO_LoginView.clickOption(driver, "identificarse", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "user6@email.com", "123456");
 
 		//Aceptar las invitaciones
@@ -811,6 +830,8 @@ public class FriendsManagerTests {
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/user7@email.com");
 		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");	
 		driver.navigate().to("https://localhost:8081/usuario/aceptar/user8@email.com");
+		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");
+		driver.navigate().to("https://localhost:8081/usuario/aceptar/user9@email.com");
 		PO_View.checkElement(driver, "text", "Invitación aceptada correctamente");
 
 	}

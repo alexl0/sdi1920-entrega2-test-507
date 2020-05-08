@@ -6,8 +6,10 @@ import org.openqa.selenium.WebElement;
 import com.uniovi.tests.util.SeleniumUtils;
 
 public class PO_View {
-
-	protected static int timeout = 2;
+	
+	//Pongo tanto tiempo porque a veces el tiempo de carga
+	//depende de la base de datos mongodb		
+	protected static int timeout = 20;
 
 	public static int getTimeout() {
 		return timeout;

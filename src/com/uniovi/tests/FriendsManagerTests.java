@@ -153,6 +153,7 @@ public class FriendsManagerTests {
 		PO_View.checkElement(driver, "text", "Se ha desconectado con éxito.");
 		PO_View.checkElement(driver, "text", "Identificación de usuario");
 	}	
+
 	//PR10. 
 	@Test
 	public void PR10() {
@@ -666,15 +667,8 @@ public class FriendsManagerTests {
 		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");
 		PO_View.checkElement(driver, "text", "Usuario en sesión: prueba1@email.com");
 
-		/**
-		 * PR030
-		 * Ver que tiene 5 mensajes nuevos del mismo usuario (user1)
-		 */
-		PO_View.checkElement(driver, "text", "5 mensajes nuevos");
-
-
 		//Clickar en el amigo correspondiente
-		PO_View.checkElement(driver, "text", "prueba1@email.com");
+		PO_View.checkElement(driver, "text", "user1@email.com");
 		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'user1@email.com')]"));
 		elementsList.get(0).click();
 
@@ -689,12 +683,40 @@ public class FriendsManagerTests {
 	//PR030. 
 	@Test
 	public void PR30() {
-		assertTrue("Prueba 30 hecha en prueba 29", true);
+		//Loguearse con user1@email.com
+		driver.navigate().to(URL+"/cliente.html");
+		PO_View.checkElement(driver, "text", "Email");	
+		PO_LoginView.fillForm(driver, "user1@email.com", "123456");
+		PO_View.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
+
+		//Clickar en el amigo correspondiente
+		PO_View.checkElement(driver, "text", "prueba1@email.com");
+		List<WebElement> elementsList = driver.findElements(By.xpath("//*[contains(text(),'prueba1@email.com')]"));
+		elementsList.get(0).click();
+
+		//Escribir 4 mensajes para que haya mensajes que mostrar
+		escribirMensajeYEnviar(5);
+		escribirMensajeYEnviar(6);
+		escribirMensajeYEnviar(7);
+
+		//Validar que los mensajes se han enviado correctamente
+		PO_View.checkElement(driver, "text", "Mensaje de prueba 5");	
+		PO_View.checkElement(driver, "text", "Mensaje de prueba 6");	
+		PO_View.checkElement(driver, "text", "Mensaje de prueba 7");
+
+		//Loguearse con prueba1@email.com
+		driver.navigate().to(URL+"/cliente.html");
+		PO_View.checkElement(driver, "text", "Email");	
+		PO_LoginView.fillForm(driver, "prueba1@email.com", "123456");
+		PO_View.checkElement(driver, "text", "Usuario en sesión: prueba1@email.com");
+
 		/**
-		 * Se ha incluido dentro de la prueba 29 ya que es solamente comprobar que se muestra
-		 * en pantalla el texto "5 mensajes nuevos", y de esa manera se simplifican los test,
-		 * además de que van más rápido.
+		 * PR030
+		 * Ver que tiene 3 mensajes nuevos de user1 (el único
+		 * amigo que tiene)
 		 */
+		PO_View.checkElement(driver, "text", "3 mensajes nuevos");
+
 	}
 
 	/**

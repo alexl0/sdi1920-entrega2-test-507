@@ -23,14 +23,11 @@
 package com.uniovi.tests;
 
 //Paquetes Java
-//import java.util.List;
+import java.util.List;
 //Paquetes JUnit 
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
 //Paquetes Selenium 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.*;
@@ -107,7 +104,15 @@ public class FriendsManagerTests {
 	driver.quit();
     }
 
-    // PR01.
+    /**
+     * #######################################
+     * ###### Registrarse como usuario #######
+     * #######################################
+     */
+
+    /**
+     * Registro de Usuario con datos válidos
+     */
     @Test
     public void PR01() {
 	PO_NavView.clickOption(driver, "registrarse", "class", "btn btn-primary");
@@ -115,14 +120,20 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "Nuevo usuario registrado");
     }
 
-    // PR02.
+    /**
+     * Registro de Usuario con datos inválidos 
+     * (email vacío, nombre vacío, apellidos vacíos).
+     */
     @Test
     public void PR02() {
 	PO_NavView.clickOption(driver, "registrarse", "class", "btn btn-primary");
 	PO_RegisterView.fillForm(driver, "", "", "", "123456", "123456");
     }
 
-    // PR03.
+    /**
+     * Registro de Usuario con datos inválidos 
+     * (repetición de contraseña inválida).
+     */
     @Test
     public void PR03() {
 	PO_NavView.clickOption(driver, "registrarse", "class", "btn btn-primary");
@@ -130,7 +141,9 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "Las contraseñas no coinciden");
     }
 
-    // PR04.
+    /**
+     * Registro de Usuario con datos inválidos (email existente).
+     */
     @Test
     public void PR04() {
 	PO_NavView.clickOption(driver, "registrarse", "class", "btn btn-primary");
@@ -138,7 +151,15 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "Este email ya está registrado");
     }
 
-    // PR05.
+    /**
+     * #######################################
+     * ###### Iniciar sesión #################
+     * #######################################
+     */
+
+    /**
+     * Inicio de sesión con datos válidos (usuario estándar).
+     */
     @Test
     public void PR05() {
 	PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -147,7 +168,10 @@ public class FriendsManagerTests {
 	PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
     }
 
-    // PR06.
+    /**
+     * Inicio de sesión con datos inválidos 
+     * (usuario estándar, campo email y contraseña vacíos).
+     */
     @Test
     public void PR06() {
 	PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -155,7 +179,10 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "Identificación de usuario");
     }
 
-    // PR07.
+    /**
+     * Iniciodesesión  con  datos inválidos
+     * (usuario  estándar,  email  existente,  pero  contraseña incorrecta).
+     */
     @Test
     public void PR07() {
 	PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -163,7 +190,10 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "Email o password incorrecto");
     }
 
-    // PR08.
+    /**
+     * Inicio de sesión con datos inválidos 
+     * (usuario estándar, email no existentey contraseña no vacía)
+     */
     @Test
     public void PR08() {
 	PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -171,7 +201,17 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "Email o password incorrecto");
     }
 
-    // PR09.
+
+    /**
+     * #######################################
+     * ###### Fin de sesión ##################
+     * #######################################
+     */
+
+    /**
+     * Hacer click en la opción de salir de sesión y comprobar 
+     * que se redirige a la página de inicio de sesión (Login).
+     */
     @Test
     public void PR09() {
 	PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -182,13 +222,26 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "Identificación de usuario");
     }
 
-    // PR10.
+    /**
+     * Comprobar que el botón cerrar sesión no está 
+     * visible si el usuario no está autenticado.
+     */
     @Test
     public void PR10() {
 	SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "Desconectarse", PO_View.getTimeout());
     }
 
-    // PR11.
+    /**
+     * #######################################
+     * ###### Listar todos los usuarios ######
+     * ###### de la aplicación ###############
+     * #######################################
+     */
+
+    /**
+     * Mostrar el listado de usuarios y comprobar que se 
+     * muestran todos los que existen enel sistema.
+     */
     @Test
     public void PR11() {
 	PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -209,7 +262,19 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "user12@email.com");
     }
 
-    // PR12.
+    /**
+     * ###########################################
+     * ###### Buscar entre todos los usuarios ####
+     * ###### de la aplicación ###################
+     * ###########################################
+     */
+
+    /**
+     * Hacer  una  búsqueda  con  el  campo  vacío 
+     * y  comprobar  que  se  muestra  la  página
+     * que corresponde con el listado usuarios existentes
+     * en el sistema.
+     */
     @Test
     public void PR12() {
 	PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -225,7 +290,12 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "user6@email.com");
     }
 
-    // PR13.
+    /**
+     * Hacer  una  búsqueda  escribiendo  en
+     * el  campo  un  texto  que  no  exista
+     * y  comprobar  que  se muestra la página
+     * que corresponde, con la lista de usuarios vacía
+     */
     @Test
     public void PR13() {
 	PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -242,7 +312,12 @@ public class FriendsManagerTests {
 	SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user5@email.com", PO_View.getTimeout());
     }
 
-    // PR14.
+    /**
+     * Hacer  una  búsquedacon  un texto  específico y
+     * comprobar  que  se  muestra  la  página  que corresponde,
+     * con la lista de usuarios en los que el texto especificado
+     * sea parte de su nombre, apellidos o de su email.
+     */
     @Test
     public void PR14() {
 	PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -259,7 +334,19 @@ public class FriendsManagerTests {
 	SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user5@email.com", PO_View.getTimeout());
     }
 
-    // PR15.
+    /**
+     * ###########################################
+     * ###### Enviar una invitación de ###########
+     * ###### amistad a un usuario ###############
+     * ###########################################
+     */
+
+    /**
+     * Desde el listado de usuarios de la aplicación,
+     * enviar una invitación de amistad a un usuario.
+     * Comprobar que la solicitud de amistad aparece
+     * en el listado de invitaciones (punto siguiente).
+     */
     @Test
     public void PR15() {
 	PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -276,7 +363,14 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "prueba1@email.com");
     }
 
-    // PR16.
+    /**
+     * Desde el listado de usuarios de la aplicación,
+     * enviar una invitación de amistad a un usuario al
+     * que ya le habíamos enviado la invitación previamente.
+     * No debería dejarnos enviar la invitación,
+     * se podría ocultar el botón de enviar invitación
+     * onotificar que ya había sido enviada previamente
+     */
     @Test
     public void PR16() {
 	PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
@@ -287,15 +381,24 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "Hay invitaciones pendientes entre usted y esa persona");
     }
 
-    // PR017.
+    /**
+     * ###########################################
+     * ###### Listar las invitaciones ############
+     * ######  de amistad recibidas ##############
+     * ###########################################
+     */
+
+    /**
+     * Mostrar  el  listado  de  invitaciones  de  amistad
+     * recibidas.  Comprobar con  un  listado  que contenga
+     * varias invitacionesrecibidas.
+     */
     @Test
     public void PR17() {
 
 	// Enviar más peticiones a user1 desde otros usuarios
 	PO_NavView.clickOption(driver, "identificarse", "class", "btn btn-primary");
 	PO_LoginView.fillForm(driver, "user2@email.com", "123456");
-	// TODO las pruebas deben simular la interaccion real del usuario,
-	// calcando botones, no yendo por urs's
 	driver.navigate().to("https://localhost:8081/usuario/invitar/user1@email.com");
 	PO_View.checkElement(driver, "text", "Invitación enviada correctamente");
 	PO_NavView.clickOption(driver, "desconectarse", "class", "btn btn-primary");
@@ -330,7 +433,18 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "user5@email.com");
     }
 
-    // PR18.
+    /**
+     * ###################################################
+     * ###### Aceptar una invitación recibida ############
+     * ###################################################
+     */
+
+    /**
+     * Sobre  el  listado  de  invitaciones  recibidas.
+     * Hacer  click  en  el  botón/enlace  de  una  de  ellas
+     * y comprobar que dicha solicitud desaparece del listado
+     * de invitaciones.
+     */
     @Test
     public void PR18() {
 	// Se loguea user1
@@ -408,7 +522,16 @@ public class FriendsManagerTests {
 
     }
 
-    // PR19.
+    /**
+     * ###################################################
+     * ###### Listar los usuarios amigos #################
+     * ###################################################
+     */
+
+    /**
+     * Mostrar el listado de amigos de un usuario. Comprobar 
+     * que el listado contiene los amigos que deben ser.
+     */
     @Test
     public void PR19() {
 	// Se loguea user1
@@ -438,7 +561,17 @@ public class FriendsManagerTests {
 
     }
 
-    // P20.
+    /**
+     * ###################################################
+     * ###### Seguridad ##################################
+     * ###################################################
+     */
+
+    /**
+     * Intentar acceder sin estar autenticado a la opción de
+     * listado de usuarios. Se deberá volver al formulario de
+     * login
+     */
     @Test
     public void PR20() {
 	// No se puede calcar el botón porque no sale en pantalla, se intenta por url
@@ -446,7 +579,12 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "Identificación de usuario");
     }
 
-    // PR21.
+    /**
+     * Intentar acceder sin estar autenticado 
+     * a la opción de listado de invitaciones de amistad
+     * recibida de un usuario estándar. Se deberá volver
+     * al formulario de login
+     */
     @Test
     public void PR21() {
 	// No se puede calcar el botón porque no sale en pantalla, se intenta por url
@@ -459,12 +597,32 @@ public class FriendsManagerTests {
      * detecta automáticamente, no se le pasa como parámetro, por tanto no hay
      * manera fácil de falsificarlo.
      */
+    /**
+     * Intentar  acceder estando  autenticado  como
+     * usuario  standard  a la  lista  de  amigos  de  
+     * otro usuario. Se deberá mostrar un mensaje 
+     * de acción indebida.
+     */
     @Test
     public void PR22() {
 	assertTrue("No se puede hacer eso en la aplicación.", true);
     }
 
-    // PR23.
+    /**
+     * ###################################################
+     * ###### Cliente ####################################
+     * ###################################################
+     */
+
+    /**
+     * ###################################################
+     * ###### Autenticación del usuario ##################
+     * ###################################################
+     */
+
+    /**
+     * Inicio de sesión con datos válidos.
+     */
     @Test
     public void PR23() {
 	driver.navigate().to(URL + "/cliente.html");
@@ -473,7 +631,10 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "Usuario en sesión: user1@email.com");
     }
 
-    // PR24.
+    /**
+     * Inicio de sesión con datos inválidos 
+     * (usuario no existente en la aplicación).
+     */
     @Test
     public void PR24() {
 	driver.navigate().to(URL + "/cliente.html");
@@ -500,7 +661,16 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "Email requerido");
     }
 
-    // PR25.
+    /**
+     * ###################################################
+     * ###### Autenticación del usuario ##################
+     * ###################################################
+     */
+
+    /**
+     * Acceder a la lista de amigos de un usuario,
+     * que al menos tenga tres amigos.
+     */
     @Test
     public void PR25() {
 	// Loguearse
@@ -517,7 +687,11 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "user5@email.com");
     }
 
-    // PR26.
+    /**
+     * Acceder a la lista de amigos de un usuario, 
+     * y realizar un filtrado para encontrar a un amigo concreto, 
+     * el nombre a buscar debe coincidir con el de un amigo.
+     */
     @Test
     public void PR26() {
 	// Loguearse
@@ -543,7 +717,16 @@ public class FriendsManagerTests {
 	SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "user5@email.com", PO_View.getTimeout());
     }
 
-    // PR27.
+    /**
+     * ###################################################
+     * ###### Autenticación del usuario ##################
+     * ###################################################
+     */
+
+    /**
+     * Acceder  a  la  lista  de  mensajes  de  un  amigo“chat”,  
+     * la  lista  debe  contener  almenos  tres mensajes
+     */
     @Test
     public void PR27() {
 	// Loguearse
@@ -584,7 +767,17 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "free", "//*[@id=\"botonEnviarMensaje\"]").get(0).click();
     }
 
-    // PR028.
+    /**
+     * ###################################################
+     * ###### Crear mensaje ##############################
+     * ###################################################
+     */
+
+    /**
+     * Acceder a la lista de mensajes de un amigo“chat” 
+     * y crear un nuevo mensaje, validar que el mensaje
+     * aparece en la lista de mensajes.
+     */
     @Test
     public void PR28() {
 	// Loguearse
@@ -630,28 +823,42 @@ public class FriendsManagerTests {
 	// Escribir el mensaje de 401 caracteres (intentarlo,
 	// ya que se borra automaticamente)
 	PO_View.checkElement(driver, "free", "//*[@id=\"escribir-mensaje\"]").get(0)
-		.sendKeys("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-			+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-			+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-			+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-			+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-			+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-			+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-			+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + "aaaaaaaaaaaaaaaaa");
+	.sendKeys("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+		+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+		+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+		+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+		+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+		+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+		+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+		+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + "aaaaaaaaaaaaaaaaa");
 
 	// Esperar a que salga en pantalla el error
 	PO_View.checkElement(driver, "text", "No se pueden enviar mensajes de más de 400 caracteres");
 
 	// Escribir el mensaje
 	PO_View.checkElement(driver, "free", "//*[@id=\"escribir-mensaje\"]").get(0)
-		.sendKeys("Mensaje normal, con un numero de caracteres normal");
+	.sendKeys("Mensaje normal, con un numero de caracteres normal");
 
 	// Comprobar que se ha quitado el error
 	SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "No se pueden enviar mensajes de más de 400 caracteres",
 		PO_View.getTimeout());
     }
 
-    // PR029.
+    /**
+     * ###################################################
+     * ###### Marcar mensajes como leídos ################
+     * ###### de forma automática ########################
+     * ###################################################
+     */
+
+    /**
+     * Identificarse en la aplicación y enviar un mensaje a un amigo, 
+     * validar que el mensaje enviado aparece  en  el  chat.  
+     * Identificarse  después con  el  usuario  que  recibido  
+     * el  mensaje  y  validar  que  tiene  un mensaje sin leer, 
+     * entrar en el chat y comprobar que el mensaje pasa a tener 
+     * el estado leído.
+     */
     @Test
     public void PR29() {
 	/**
@@ -678,7 +885,21 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "Hola! Soy user1! ✔");
     }
 
-    // PR030.
+
+    /**
+     * ###################################################
+     * ###### Mostrar el número de mensajes sin leer #####
+     * ###################################################
+     */
+
+    /**
+     * Identificarse en la aplicación y enviar tres 
+     * mensajes a un amigo, validar que los mensajes 
+     * enviados aparecen en el chat. Identificarse 
+     * después con el usuario que recibido el mensaje 
+     * y validar que el número de mensajes sin 
+     * leer aparece en la propia lista de amigos.
+     */
     @Test
     public void PR30() {
 	// Loguearse con user1@email.com
@@ -714,6 +935,25 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "3 mensajes nuevos");
 
     }
+
+    /**
+     * ###################################################
+     * ###### Ordenar la lista de amigo ##################
+     * ###### por último mensaje #########################
+     * ###################################################
+     */
+
+    /**
+     * Identificarse con un usuario A que al menos tenga 3 
+     * amigos, ir al chat del ultimo amigo de la lista 
+     * y enviarle un mensaje, volver a la lista de amigos 
+     * y comprobar que el usuario al que se le ha enviado 
+     * el  mensaje  esta  en primera  posición.  
+     * Identificarse  con  el  usuario  B y  enviarle  
+     * un mensaje  al  usuario  A. Volver a identificarse 
+     * con el usuario A y ver que el usuario que acaba de 
+     * mandarle el mensaje es el primero en su lista de amigos.
+     */
 
     /**
      * El teset pr031 se ha dividido en dos porque tiene dos claras partes. PR031

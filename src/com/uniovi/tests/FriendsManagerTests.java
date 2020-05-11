@@ -251,13 +251,13 @@ public class FriendsManagerTests {
 	PO_View.checkElement(driver, "text", "user3@email.com");
 	PO_View.checkElement(driver, "text", "user4@email.com");
 	PO_View.checkElement(driver, "text", "user5@email.com");
-	PO_View.checkElement(driver, "free", "//a[contains(@class, 'page-link')]").get(1).click();
+	PO_View.checkElement(driver, "free", "//a[contains(@class, 'page-link')]").get(2).click();
 	PO_View.checkElement(driver, "text", "user6@email.com");
 	PO_View.checkElement(driver, "text", "user7@email.com");
 	PO_View.checkElement(driver, "text", "user8@email.com");
 	PO_View.checkElement(driver, "text", "user9@email.com");
 	PO_View.checkElement(driver, "text", "user10@email.com");
-	PO_View.checkElement(driver, "free", "//a[contains(@class, 'page-link')]").get(2).click();
+	PO_View.checkElement(driver, "free", "//a[contains(@class, 'page-link')]").get(3).click();
 	PO_View.checkElement(driver, "text", "user11@email.com");
 	PO_View.checkElement(driver, "text", "user12@email.com");
     }
@@ -501,11 +501,12 @@ public class FriendsManagerTests {
 
     /**
      * Intentar agregar a alguien sin estar logueado
+     * Se redigirá a la página de login
      */
     @Test
     public void PR18_4() {
 	driver.navigate().to("https://localhost:8081/usuario/aceptar/user1@email.com");
-	PO_View.checkElement(driver, "text", "Debe identificarse primero");
+	PO_View.checkElement(driver, "text", "Identificación de usuario");
     }
 
     /**
